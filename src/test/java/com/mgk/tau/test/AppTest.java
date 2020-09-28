@@ -6,10 +6,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Protocol;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
@@ -56,13 +53,17 @@ public class AppTest {
         }.getClass().getEnclosingMethod().getName(), "Executed on " + new Date().toLocaleString());
 
         baseURL = "https://www.google.com";
-        nodeURL = "http://127.0.0.1:4545/wd/hub";
+        nodeURL = "http://127.0.0.1:4444/wd/hub";
 
-        DesiredCapabilities desiredCapabilities = DesiredCapabilities.operaBlink();
+        Capabilities chromeCapabilities = DesiredCapabilities.chrome();
+        Capabilities firefoxCapabilities = DesiredCapabilities.firefox();
+
+
         //desiredCapabilities.setBrowserName("chrome");
         //desiredCapabilities.setPlatform(Platform.WIN10);
         URL remoteAddress;
-        webDriver = new RemoteWebDriver(new URL(nodeURL), desiredCapabilities);
+        webDriver = new RemoteWebDriver(new URL(nodeURL), chromeCapabilities);
+        webDriver = new RemoteWebDriver(new URL(nodeURL), firefoxCapabilities);
 
         webDriver.get(baseURL);
         WebElement webElement = webDriver.findElement(By.name("q"));

@@ -1,0 +1,32 @@
+#run with WSL prompt
+#docker-compose -f docker-compose.yml up -d --scale firefox=1 --scale chrome=1
+
+
+version: "3"
+services:
+
+  firefox:
+    image: selenium/node-firefox-debug
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+
+  chrome:
+    image: selenium/node-chrome-debug
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+
+  hub:
+    image: selenium/hub
+    ports:
+      - "4444:4444"
+    environment:
+      - GRID_TIMEOUT=30000
+      - GRID_BROWSER_TIMEOUT=30000

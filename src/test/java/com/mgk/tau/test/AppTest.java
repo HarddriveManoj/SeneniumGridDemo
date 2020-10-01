@@ -56,14 +56,14 @@ public class AppTest {
         nodeURL = "http://127.0.0.1:4444/wd/hub";
 
         Capabilities chromeCapabilities = DesiredCapabilities.chrome();
-        Capabilities firefoxCapabilities = DesiredCapabilities.firefox();
+    //    Capabilities firefoxCapabilities = DesiredCapabilities.firefox();
 
 
         //desiredCapabilities.setBrowserName("chrome");
         //desiredCapabilities.setPlatform(Platform.WIN10);
         URL remoteAddress;
         webDriver = new RemoteWebDriver(new URL(nodeURL), chromeCapabilities);
-        webDriver = new RemoteWebDriver(new URL(nodeURL), firefoxCapabilities);
+       // webDriver = new RemoteWebDriver(new URL(nodeURL), firefoxCapabilities);
 
         webDriver.get(baseURL);
         WebElement webElement = webDriver.findElement(By.name("q"));

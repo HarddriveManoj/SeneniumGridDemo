@@ -1,0 +1,30 @@
+
+
+
+#docker run -d --name prometheus -p 9090:9090 -v /mnt/e/Workspace/SeneniumGridDemo/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+
+
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: prometheus
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - localhost:9090
+  - job_name: docker
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - localhost:9323
